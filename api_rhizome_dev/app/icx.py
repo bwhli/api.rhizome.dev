@@ -1,3 +1,4 @@
+import httpx
 import os
 from dotenv import load_dotenv
 from iconsdk.icon_service import IconService
@@ -13,6 +14,7 @@ class Icx:
     ICON_SERVICE = IconService(HTTPProvider(os.environ["CTZ_API_ENDPOINT"], 3))
     CHAIN_SCORE = "cx0000000000000000000000000000000000000000"
     GOVERNANCE_SCORE = "cx0000000000000000000000000000000000000001"
+    TRACKER_API_URL = "https://tracker.icon.community/api/v1"
 
     def __init__(self) -> None:
         pass
@@ -56,6 +58,8 @@ class Icx:
                 result["rewardFund"][k] = int(v, 16)
         return result
 
-    def get_total_supply(self):
-        result = self.ICON_SERVICE.get_total_supply()
-        return result
+    async def get_supply(self):
+        async with httpx.AsyncClient() as client:
+            url = f"{self.TRACKER_API_URL}/metrics/supply"
+            response = await client.get(url)
+            return response.json()
