@@ -1,24 +1,21 @@
 from sys import prefix
 from api_rhizome_dev.app.routers import icx
+from api_rhizome_dev.app.utils import is_production
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-origins = [
-    "https://icon.community",
-    "http://localhost",
-    "http://localhost:1313",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if is_production() is False:
+    origins = ["*"]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 app.include_router(icx.router, prefix="/api/v1")
 

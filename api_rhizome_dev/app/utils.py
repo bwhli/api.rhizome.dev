@@ -1,3 +1,6 @@
+import os
+
+
 def human_format(num):
     num = float("{:.3g}".format(num))
     magnitude = 0
@@ -7,3 +10,10 @@ def human_format(num):
     return "{}{}".format(
         "{:f}".format(num).rstrip("0").rstrip("."), ["", "K", "M", "B", "T"][magnitude]
     )
+
+
+def is_production():
+    if os.getenv("ENV") == "PRODUCTION":
+        return True
+    else:
+        return False
