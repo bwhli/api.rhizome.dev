@@ -1,4 +1,3 @@
-from sys import prefix
 from api_rhizome_dev.app.routers import icx
 from api_rhizome_dev.app.utils import is_production
 from fastapi import FastAPI, status
@@ -7,15 +6,21 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-if is_production() is False:
+if is_production() is True:
+    origins = [
+        "https://icon.community",
+        "https://compassionate-yonath-d3429f.netlify.app",
+    ]
+else:
     origins = ["*"]
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(icx.router, prefix="/api/v1")
 
