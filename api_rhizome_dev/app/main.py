@@ -1,12 +1,11 @@
 from api_rhizome_dev.app.routers import icx
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
 origins = [
-    "https://studiomirai.io",
+    "https://icon.community",
     "http://localhost",
     "http://localhost:1313",
 ]
@@ -20,3 +19,8 @@ app.add_middleware(
 )
 
 app.include_router(icx.router, prefix="/api/v1")
+
+
+@app.get("/healthz/", status_code=status.HTTP_204_NO_CONTENT)
+async def health_check():
+    return
