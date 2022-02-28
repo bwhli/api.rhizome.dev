@@ -12,6 +12,7 @@ iconsdk = "^2.0.0"
 python-dotenv = "^0.19.2"
 uvicorn = "^0.17.5"
 httpx = "^0.22.0"
+Pillow = "^9.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

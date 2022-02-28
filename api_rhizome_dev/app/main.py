@@ -1,4 +1,4 @@
-from api_rhizome_dev.app.routers import icx
+from api_rhizome_dev.app.routers import cps, icx
 from api_rhizome_dev.app.utils import is_production
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(cps.router, prefix="/api/v1")
 app.include_router(icx.router, prefix="/api/v1")
 
 
