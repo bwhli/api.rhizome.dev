@@ -16,3 +16,7 @@ class Cps(Icx):
                     int(result[key]["_total_amount"][token], 16) / 10**18
                 )
         return result
+
+    def get_prep_count(self):
+        result = self.call(self.CPS_CONTRACT, "get_PReps", {})
+        return len(result)

@@ -31,3 +31,10 @@ def get_distributed_funds():
     )
     html_content = f"${distributed_funds_in_usd:,.0f}"
     return HTMLResponse(content=html_content)
+
+
+@router.get("/prep-count/")
+def get_prep_count():
+    prep_count = cps.get_prep_count()
+    html_content = f"{prep_count}"
+    return HTMLResponse(content=html_content)
