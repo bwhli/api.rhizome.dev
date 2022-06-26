@@ -1,0 +1,21 @@
+<table>
+    <tr class="text-left w-auto">
+        <th class="px-2 border border-gray-800 text-center">#</th>
+        <th class="px-2 border border-gray-800">Name</th>
+        <th class="px-2 border border-gray-800">Delegation</th>
+        <th class="px-2 border border-gray-800">Bond</th>
+        <th class="px-2 border border-gray-800">Daily Reward</th>
+    </tr>
+    {% for validator in validators %}
+    <tr>
+        <td class="px-2 border border-gray-800 text-center text-xs">
+            {{ validators.index(validator) + 1 }}</td>
+        <td class="px-2 border border-gray-800">{{ validator.name }}</td>
+        <td class="px-2 border border-gray-800">
+            {{ "{:,.0f}".format((validator["delegated"] / 10 ** 18)) }} ICX</td>
+        <td class="px-2 border border-gray-800">{{ "{:,.2f}".format((validator["bond_ratio"]) * 100) }}%
+        </td>
+        <td class="px-2 border border-gray-800">{{ "{:,.0f}".format((validator["daily_reward"])) }} ICX
+    </tr>
+    {% endfor %}
+</table>

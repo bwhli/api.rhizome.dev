@@ -1,6 +1,10 @@
 import os
 
 
+def hex_to_int(input):
+    return int(input, 16)
+
+
 def human_format(num):
     num = float("{:.3g}".format(num))
     magnitude = 0

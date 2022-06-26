@@ -1,4 +1,4 @@
-from api_rhizome_dev.app.routers import cps, icx
+from api_rhizome_dev.app.routers import cps, icx, modules
 from api_rhizome_dev.app.utils import is_production
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +9,7 @@ app = FastAPI()
 if is_production() is True:
     origins = [
         "https://icon.community",
+        "https://rhizome.dev",
         "https://compassionate-yonath-d3429f.netlify.app",
     ]
 else:
@@ -24,6 +25,7 @@ app.add_middleware(
 
 app.include_router(cps.router, prefix="/api/v1")
 app.include_router(icx.router, prefix="/api/v1")
+app.include_router(modules.router, prefix="/api/v1")
 
 
 @app.get("/", include_in_schema=False)
