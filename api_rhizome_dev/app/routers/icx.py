@@ -44,8 +44,8 @@ async def get_icx_supply(format: str = "json"):
 
 @router.get("/market-cap/")
 async def get_icx_market_cap(format: str = "json"):
-    response = await icx.get_supply()
-    circulating_supply = response["circulating_supply"] / 10**18
+    response = icx.get_supply()
+    circulating_supply = float(response["tmainInfo"]["icxCirculationy"])
     icx_usd_price = icx.get_icx_usd_price()
     icx_market_cap = circulating_supply * icx_usd_price
     if format == "html":

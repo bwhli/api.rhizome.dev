@@ -100,7 +100,7 @@ class Icx:
 
         return sorted(prep_info, key=lambda k: k["bonded_delegation"], reverse=True)
 
-    async def get_supply(self):
-        url = f"{self.TRACKER_API_URL}/metrics/supply"
+    def get_supply(self):
+        url = "https://main.tracker.solidwallet.io/v3/main/mainInfo"
         r = requests.get(url)
         return r.json()
