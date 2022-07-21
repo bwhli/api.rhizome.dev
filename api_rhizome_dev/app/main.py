@@ -33,6 +33,6 @@ async def index():
     return RedirectResponse("/docs")
 
 
-@app.get("/healthz/", status_code=status.HTTP_204_NO_CONTENT, include_in_schema=False)
+@app.get("/healthz/", status_code=status.HTTP_200_OK, include_in_schema=False)
 async def health_check():
-    return
+    return "OK"
